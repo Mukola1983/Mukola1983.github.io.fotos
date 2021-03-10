@@ -107,7 +107,7 @@ let removeDivsAnim = false;
 
 startButton.onclick = function(){
 	if(animationAllov && addDivsAnim){
-		start(5,"backgDiv", container);
+		start(10,"backgDiv", container);
 		addDivsAnim = false;
 		removeDivsAnim = true;
 	}else if (animationAllov && removeDivsAnim) {
@@ -132,7 +132,7 @@ function removeDivs(){
 			if (i <= -1) {
 				clearInterval(timerId);
 			}
-		}, 1000);
+		}, 800);
 		/*
 		for(let i=0;i<divs.length;i++){
 			divs[i].remove();
@@ -157,6 +157,15 @@ function disapering(elem){
 }
 
 
+var imgArray = new Array();
+
+for(let i=1;i<11;i++){
+	imgArray[i] = new Image();
+	imgArray[i].src = `..//img/family/img_${i}.jpg`;
+}
+
+console.log(imgArray[1]);
+
 /////////////////////////////////////PROCESS FUNCTIONS
 //Main function ==============================================
 function start(num, clasName, contain){
@@ -177,7 +186,8 @@ function start(num, clasName, contain){
 			
 			divTocenter('.backgDiv','_center',contain)
 
-			addImage(`..//img/family/img_${i}.jpg`, newDiw)
+			addImage(imgArray[i], newDiw)
+		//	addImage(`..//img/family/img_${i}.jpg`, newDiw)
 			setTimeout(addActive,800, newDiw,'_active');
 		i++;
 	}, 1000);
@@ -194,8 +204,9 @@ function addActive(first,active){
 
 // Adding images to divs===============================
 function addImage(imegSrc, parent){
-	var elem = document.createElement("img");
-	elem.setAttribute("src", imegSrc);
+//	var elem = document.createElement("img");
+	var elem = imegSrc;
+//	elem.setAttribute("src", imegSrc);
 	parent.appendChild(elem);
 }
 // Adding images to divs===============================
