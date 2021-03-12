@@ -12,11 +12,19 @@
 }
 
 
+.box {
+	display: none;
+	position: absolute;
+	top: 50% ;
+	left: 50%;
+}
+
+
+
 .backgDiv{
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform:translate(-50%,-50%);
 	transform: scale(0, 0);
 	transition: 0.7s;
 	display: flex;
@@ -31,7 +39,7 @@
 	object-fit: contain;
 }
 ._active{
-	transform: scale(1, 1);
+	transform: scale(1, 1) !important;
 	position: absolute;
 	background: #000;
 	width: 100px;
@@ -98,7 +106,7 @@
 	animation: rotate 5s linear infinite;
 }
 .button span::before{
-	background: rgba(161,184,182,0.5);
+	background: rgba(161,184,182,0.7);
 	border-radius: 40%;
 	animation: rotate 9s linear infinite;
 }

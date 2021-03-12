@@ -87,27 +87,59 @@ function addNewPosition(newElem){
 // Random Position Function====================
 
 }
+
+//Center position =========================
+function removeToCenter(elem){
+	let left = window.innerWidth/2;
+	let top = window.innerHeight/2;
+
+	let width = elem.offsetWidth / 2;
+	let height = elem.offsetHeight /2;
+
+	console.log(left)
+	elem.style.left = `${(left-width)+'px'}`;
+	elem.style.top = `${(top-height)+'px'}`;
+}
 //////////////////// Add Styles to div======================================
 
 
-
+//Start Button====================
 const startButton = document.querySelector('.link');
 
+//Container for Divs=================
 const container = document.querySelector('.content');
 
-
+// Variacles=//////////////////////////
+//Animation Alloving=============
 let animationAllov = true;
 
+//Adding blocks==================
 let addDivsAnim = true;
 
+//Remove blocks===================
 let removeDivsAnim = false;
+
+// Variacles=//////////////////////////
 
 //Start animation ==================================================
 
-
+/*
 startButton.onclick = function(){
 	if(animationAllov && addDivsAnim){
 		start(10,"backgDiv", container);
+		addDivsAnim = false;
+		removeDivsAnim = true;
+	}else if (animationAllov && removeDivsAnim) {
+		removeDivs()
+		addDivsAnim = true;
+		removeDivsAnim = false;
+	}
+};
+*/
+
+startButton.onclick = function(){
+	if(animationAllov && addDivsAnim){
+		start_02(10,"backgDiv", container);
 		addDivsAnim = false;
 		removeDivsAnim = true;
 	}else if (animationAllov && removeDivsAnim) {
@@ -120,7 +152,7 @@ startButton.onclick = function(){
  //Start animation ==================================================
 
 function removeDivs(){
-	let divs = document.querySelectorAll('.backgDiv');
+	let divs = document.querySelectorAll('.box');
 	let i = divs.length-1;
 
 
@@ -133,25 +165,27 @@ function removeDivs(){
 				clearInterval(timerId);
 			}
 		}, 800);
-		/*
-		for(let i=0;i<divs.length;i++){
-			divs[i].remove();
-		}
-		*/
 }
 
-//element.style.opacity = "0.9";
 function disapering(elem){
 	let i = 1;
 
 	let timerId = setInterval(function() {
 	//	elem.style.opacity = `${i}`;
+		elem.classList.remove('_active');
 		elem.style.transform=`scale(${i}, ${i})`;
-		console.log(i);
 		i = i - 0.1;
 		if (i <= 0.1) {
 				clearInterval(timerId);
-				elem.remove();
+		//		elem.classList.remove('_active');
+				elem.classList.remove('backgDiv');
+			/*	let left = window.innerWidth/2 + 'px';
+				let top = window.innerHeight/2 + 'px';
+				console.log(left)
+				elem.style.left = `${left}`;
+				elem.style.top = `${top}`; */
+				
+			//	elem.remove();
 			}
 	}, 150);
 }
@@ -159,26 +193,26 @@ function disapering(elem){
 
 var imgArray = new Array();
 
-for(let i=1;i<11;i++){
-	imgArray[i] = new Image();
-	imgArray[i].src = `..//img/family/img_${i}.jpg`;
+window.onload = function(e){ 
+	for(let i=1;i<11;i++){
+		imgArray[i] = new Image();
+		imgArray[i].src =`../img/family/img_1.jpg` ;
+
+	}
 }
 
-console.log(imgArray[1]);
+
 
 /////////////////////////////////////PROCESS FUNCTIONS
 //Main function ==============================================
 function start(num, clasName, contain){
 	let i = 1;
 	animationAllov = false;
-	console.log('animationAllov',animationAllov);
 	let timerId = setInterval(function() {
 			if (i >= num) {
 				clearInterval(timerId);
 				animationAllov = true;
-				console.log('animationAllov++',animationAllov);
 			}
-			console.log('animationAllov--',animationAllov);
 			let newDiw = document.createElement("div");
 			newDiw.className = clasName;
 			contain.append(newDiw);
@@ -190,6 +224,30 @@ function start(num, clasName, contain){
 		//	addImage(`..//img/family/img_${i}.jpg`, newDiw)
 			setTimeout(addActive,800, newDiw,'_active');
 		i++;
+	}, 1000);
+}
+
+
+function start_02(num, clasName, contain){
+
+	animationAllov = false;
+	let arrDivs = document.querySelectorAll('.box');
+	let i = arrDivs.length-1;
+	let timerId = setInterval(function() {
+			if (i === 0) {
+				clearInterval(timerId);
+				animationAllov = true;
+			}
+			removeToCenter(arrDivs[i]);
+			arrDivs[i].classList.add(clasName);
+			divWithFotos = document.querySelectorAll('.backgDiv');
+			
+			divTocenter('.backgDiv','_center',contain)
+
+		//	addImage(imgArray[i], newDiw)
+		//	addImage(`..//img/family/img_${i}.jpg`, newDiw)
+			setTimeout(addActive,800, arrDivs[i],'_active');
+		i--;
 	}, 1000);
 }
 //Main function ==============================================
@@ -205,9 +263,9 @@ function addActive(first,active){
 // Adding images to divs===============================
 function addImage(imegSrc, parent){
 //	var elem = document.createElement("img");
-	var elem = imegSrc;
+//	var elem = imegSrc;
 //	elem.setAttribute("src", imegSrc);
-	parent.appendChild(elem);
+	parent.appendChild(imegSrc);
 }
 // Adding images to divs===============================
 
