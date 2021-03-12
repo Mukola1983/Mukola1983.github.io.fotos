@@ -190,7 +190,7 @@ function disapering(elem){
 	}, 150);
 }
 
-
+/*
 var imgArray = new Array();
 
 window.onload = function(e){ 
@@ -200,7 +200,7 @@ window.onload = function(e){
 
 	}
 }
-
+*/
 
 
 /////////////////////////////////////PROCESS FUNCTIONS
